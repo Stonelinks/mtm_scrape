@@ -1,0 +1,7 @@
+docker run --rm -ti crisbal/torch-rnn:base bash
+
+python scripts/preprocess.py --input_txt data/output.txt --output_h5 data/output.h5 --output_json data/output.json
+
+th train.lua -input_h5 data/output.h5 -input_json data/output.json -gpu -1
+
+th sample.lua -checkpoint cv/checkpoint_10000.t7 -length 2000 -gpu -1
